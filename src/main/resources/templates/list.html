@@ -31,12 +31,13 @@
                 <!--                    <a class="readBtn" th:text="${mem.name}"> </a>-->
                 <!--                </td>-->
                 <td th:text="${mem.name}"></td>
-                <td th:text="${mem.phone}" id="phone"></td>
+                <td th:text="${mem.phone}"></td>
                 <td th:text="${mem.company}"></td>
                 <td th:text="${#dates.format(mem.regDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td th:text="${#dates.format(mem.outDate, 'yyyy-MM-dd HH:mm')}"></td>
                 <td>
-                    <button type="button" id="delete-btn" class="btn btn-warning btn-sm">삭제</button>
+                    <input type="hidden" th:value="${mem.phone}">
+                    <button type="button" id="delete-btn" class="btn btn-warning btn-sm del-bt">삭제</button>
                 </td>
             </tr>
             </tbody>
@@ -46,9 +47,9 @@
 </th:block>
 <script>
     $(function () {
-        $('#delete-btn').click(function () {
+        $('.del-bt').click(function () {
             let data = {
-                phone : $('#phone').val()
+                phone : $(this).prev().val()
             };
             swal("퇴실하시겠습니까?",{
                 buttons: {
@@ -68,7 +69,8 @@
                                 icon: "success",
                                 button: "확인"
                             }).then((v) => {
-                                location.href = "/check";
+                                // location.href = "/admin";
+                                location.reload();
                             });
                         },
                         error: function (error) {
