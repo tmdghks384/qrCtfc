@@ -11,18 +11,11 @@
                 <label>PASSWORD</label>
                 <input type="password" class="form-control" id="pw" placeholder="패스워드를 입력해주세요.">
             </div>
-            <div class="form-group">
-                <label>NAME</label>
-                <input type="text" class="form-control" id="name" placeholder="성함을 입력해주세요.">
-<!--                <textarea class="form-control DOC_TEXT" rows="5" id="content" placeholder="내용을 500자내로 입력해주세요."></textarea>-->
-<!--                <span class="mt-4" style="color: lightcoral;" id="counter">(0 / 최대 500자)</span>-->
-<!--                <br />-->
-            </div>
         </div>
         <div class="container" style="text-align: center">
-            <button type="button" class="btn btn-info" id="btnSave">가입
+            <button type="button" class="btn btn-info" id="btnSave">로그인
             </button>
-            <button type="button" class="btn btn-warning" onclick="location.href='/'">취소</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='/joinAdmin'">취소</button>
         </div>
     </th:block>
 </th:block>
@@ -43,10 +36,9 @@
         $('#btnSave').click(function () {
             let data = {
                 id: $('#id').val(),
-                pw: $('#pw').val(),
-                name: $('#name').val()
+                pw: $('#pw').val()
             };
-            swal("등록하시겠습니까?",{
+            swal("로그인 하시겠습니까?",{
                 buttons: {
                     cancel: "아니오",
                     add: "네"
@@ -55,9 +47,8 @@
                 if (v === "add"){
                     $.ajax({
                         type:'post',
-                        url: '/rest/joinAdmin',
-                        contentType: 'application/json; charset=utf-8',
-                        data: JSON.stringify(data),
+                        url: '/loginAdmin',
+                        data: data,
                         success: function (data) {
                             swal({
                                 title: "등록 완료!",

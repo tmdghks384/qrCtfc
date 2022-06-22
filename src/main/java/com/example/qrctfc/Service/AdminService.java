@@ -14,4 +14,8 @@ public class AdminService {
     public boolean joinAdmin(AdminVO vo) {
         return mapper.joinAdmin(vo) == 1;
     }
+
+    public AdminVO loginAdmin(AdminVO vo) {
+        return mapper.loginAdmin(vo);
+    }
 }
