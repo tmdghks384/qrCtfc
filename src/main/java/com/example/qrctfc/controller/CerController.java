@@ -13,27 +13,27 @@ public class CerController {
 
     @GetMapping("/")
     public String main() {
-        return "home";
+        return "user/home";
     }
 
     @GetMapping("/check")
     public String checkPage() {
-        return "check";
+        return "user/check";
     }
 
     @GetMapping("/checkIn")
     public String checkIn() {
-        return "checkIn";
+        return "user/checkIn";
     }
 
     @GetMapping("/checkOut")
     public String checkOut() {
-        return "checkOut";
+        return "user/checkOut";
     }
 
     @GetMapping("/deleteOut")
     public String check(){
-        return "deleteOut";
+        return "user/deleteOut";
     }
 
 

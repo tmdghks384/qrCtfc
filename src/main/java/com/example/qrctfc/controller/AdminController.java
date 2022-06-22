@@ -16,6 +16,11 @@ public class AdminController {
     @GetMapping("/admin")
     public String admin(Model model) {
         model.addAttribute("member", service.list());
-        return "list";
+        return "admin/list";
+    }
+
+    @GetMapping("/joinAdmin")
+    public String join() {
+        return "admin/joinAdmin";
     }
 }
