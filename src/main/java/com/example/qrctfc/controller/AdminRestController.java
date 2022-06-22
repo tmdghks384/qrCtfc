@@ -38,4 +38,20 @@ public class AdminRestController {
         }
         return new ResponseEntity<>("등록 완료", HttpStatus.OK);
     }
+
+    @PostMapping("/loginAdmin")
+    public ResponseEntity<String> loginAdmin(AdminVO adminVO, HttpServletRequest request, RedirectAttributes redirectAttributes) throws Exception{
+        HttpSession session = request.getSession();
+        AdminVO vo = admin.loginAdmin(adminVO);
+        log.info(vo);
+        if (vo == null) {
+            session.setAttribute("member", null);
+            redirectAttributes.addFlashAttribute("msg", false);
+            return new ResponseEntity<>("로그인 실패", HttpStatus.BAD_REQUEST);
+        } else {
+            session.setAttribute("member", vo);
+        }
+
+        return new ResponseEntity<>("로그인 완료", HttpStatus.OK);
+    }
 }

@@ -37,18 +37,5 @@ public class AdminController {
         return "admin/loginAdmin";
     }
 
-    @PostMapping("/loginAdmin")
-    public String loginAdmin(AdminVO adminVO, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        HttpSession session = request.getSession();
-        AdminVO vo = admin.loginAdmin(adminVO);
-        log.info(vo);
-        if (vo == null) {
-            session.setAttribute("member", null);
-            redirectAttributes.addFlashAttribute("msg", false);
-        } else {
-            session.setAttribute("member", vo);
-        }
 
-        return "redirect:/admin";
-    }
 }
