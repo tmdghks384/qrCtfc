@@ -1,0 +1,12 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<th:block th:replace="~{/layout/basic :: setContent( ~{this::content} )}">
+    <th:block th:fragment="content">
+        <h1 class="mt-4" style="text-align: center">환영합니다.</h1>
+        <div class="container" style="text-align: center">
+            <button type="button" class="btn btn-info" onclick="location.href='/checkIn'">입실하기</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='/checkOut'">퇴실하기</button>
+            <button type="button" class="btn btn-danger" onclick="location.href='/deleteOut'">삭제하기</button>
+        </div>
+    </th:block>
+</th:block>
+</html>

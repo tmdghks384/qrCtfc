@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.qrctfc.Mapper.CertificationMapper">
+    <insert id="insertCertification">
+        INSERT INTO crtf (name, phone, company) values( #{name}, #{phone}, #{company})
+    </insert>
+
+    <select id="list" resultType="CertificationVO">
+        SELECT * FROM crtf ORDER BY regDate DESC
+    </select>
+
+    <update id="outCertification">
+        UPDATE crtf SET outDate = current_timestamp WHERE phone = #{phone}
+    </update>
+
+    <delete id="deleteCertification">
+        DELETE FROM crtf WHERE phone = #{phone}
+    </delete>
+</mapper>

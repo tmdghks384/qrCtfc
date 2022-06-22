@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent( ~{this::content} )}">
+<style>
+        a:hover{
+            cursor: pointer;
+        }
+</style>
+
+    <th:block th:fragment="content">
+        <h1 class="mt-4 text-center">방문 리스트
+        </h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th scope="col">NAME</th>
+                <th scope="col">PHONE</th>
+                <th scope="col">COMPANY</th>
+                <th scope="col">등록시간</th>
+                <th scope="col">퇴실시간</th>
+                <th scope="col">삭제</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mem : ${member}">
+                <td></td>
+                <!--                <td>-->
+                <!--                    <a class="readBtn" th:text="${mem.name}"> </a>-->
+                <!--                </td>-->
+                <td th:text="${mem.name}"></td>
+                <td th:text="${mem.phone}" id="phone"></td>
+                <td th:text="${mem.company}"></td>
+                <td th:text="${#dates.format(mem.regDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#dates.format(mem.outDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td>
+                    <button type="button" id="delete-btn" class="btn btn-warning btn-sm">삭제</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </th:block>
+</th:block>
+<script>
+    $(function () {
+        $('#delete-btn').click(function () {
+            let data = {
+                phone : $('#phone').val()
+            };
+            swal("퇴실하시겠습니까?",{
+                buttons: {
+                    cancel: "아니오",
+                    add: "네"
+                }
+            }).then((v) => {
+                if (v === "add"){
+                    $.ajax({
+                        type:'post',
+                        url: '/rest/deleteOut',
+                        data: data,
+                        success: function (data) {
+                            swal({
+                                title: "퇴실 완료!",
+                                text: data,
+                                icon: "success",
+                                button: "확인"
+                            }).then((v) => {
+                                location.href = "/check";
+                            });
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            swal({
+                                title: "퇴실 실패",
+                                icon: "warning",
+                                button: "확인"
+                            });
+                        }
+                    })
+                }
+            })
+        });
+    });
+</script>
+</html>
